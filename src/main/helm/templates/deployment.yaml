@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-review-deployment
+spec:
+  selector:
+    matchLabels:
+      app: review
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: review
+    spec:
+      containers:
+        - name: review
+          image: us.gcr.io/gcp-docker-kubernetes-413420/review-service:1.0.4
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: spring-review-config
+          resources:
+            requests:
+              cpu: 200m
