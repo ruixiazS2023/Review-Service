@@ -7,7 +7,7 @@ on:
 
 jobs:
   deploy:
-    uses: CMU-18653-S24-T6/.github/workflow-templates/ci-cd-template.yml@main
+    uses: CMU-18653-S24-T6/.github/workflows/ci-cd-template.yml@main
     with:
       serviceImageRepo: 'review-service'
       serviceName: 'review-service'
