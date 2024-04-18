@@ -57,10 +57,16 @@ public class ReviewController {
         return new Result(Code.SUCCESS, commentMementoList, "success");
     }
 
-    @PutMapping("/{rid}/undo")
-    Result undoEdit(@PathVariable String rid, @RequestBody String historyId) {
+    @PutMapping("/{rid}/undo/{historyId}")
+    Result undoEdit(@PathVariable String rid, @PathVariable String historyId) {
         reviewService.undoEdit(rid, historyId);
         return new Result(Code.SUCCESS, null, "success undo");
+    }
+    
+    @GetMapping("/uid/{uid}")
+    Result getReviewsByUid(@PathVariable String uid) {
+        List<Review> reviewList = reviewService.getReviewByUid(uid);
+        return new Result(Code.SUCCESS, reviewList, "success");
     }
 
 }

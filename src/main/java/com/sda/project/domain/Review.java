@@ -110,6 +110,7 @@ public class Review implements Serializable, ICommentOriginator{
         String cmid = UUID.randomUUID().toString().substring(0,8);
         //TODO whether set userName or not
         memento.setCmid(cmid);
+        memento.setUid(this.uid);
         memento.setCommentid(this.rid);
         memento.setContent(this.content);
         memento.setDate(this.date);

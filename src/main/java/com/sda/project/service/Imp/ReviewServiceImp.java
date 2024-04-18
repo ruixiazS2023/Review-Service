@@ -64,8 +64,8 @@ public class ReviewServiceImp extends ServiceImpl<ReviewMapper, Review>
     @Override
     public void editReview(String rid, String newCentent,Timestamp date) {
         Review review = this.getById(rid);
-//        CommentMemento history = review.createMemento();
-//        commentMementoMapper.insert(history);
+        CommentMemento history = review.createMemento();
+        commentMementoMapper.insert(history);
         review.setContent(newCentent);
         review.setDate(date);
         this.updateById(review);
@@ -74,6 +74,8 @@ public class ReviewServiceImp extends ServiceImpl<ReviewMapper, Review>
     @Override
     public void undoEdit(String rid, String historyId) {
         Review review = this.getById(rid);
+        CommentMemento memento = review.createMemento();
+        commentMementoMapper.insert(memento);
         CommentMemento history = commentMementoMapper.selectById(historyId);
         review.restoreFromMemento(history);
         this.updateById(review);
@@ -82,7 +84,7 @@ public class ReviewServiceImp extends ServiceImpl<ReviewMapper, Review>
     @Override
     public List<CommentMemento> getCommentHistory(String rid) {
         QueryWrapper<CommentMemento> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("commentid", rid).orderByDesc("date");
+        queryWrapper.eq("commentId", rid).orderByDesc("date");
         return commentMementoMapper.selectList(queryWrapper);
     }
 
