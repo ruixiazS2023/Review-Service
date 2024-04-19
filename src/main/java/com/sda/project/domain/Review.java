@@ -48,8 +48,9 @@ public class Review implements Serializable, ICommentOriginator{
     /**
      *
      */
-    @JsonIgnore
     private String topicId;
+
+    private Date updatedtime;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
@@ -71,7 +72,8 @@ public class Review implements Serializable, ICommentOriginator{
                 && (this.getDate() == null ? other.getDate() == null : this.getDate().equals(other.getDate()))
                 && (this.getUid() == null ? other.getUid() == null : this.getUid().equals(other.getUid()))
                 && (this.getParentRid() == null ? other.getParentRid() == null : this.getParentRid().equals(other.getParentRid()))
-                && (this.getTopicId() == null ? other.getTopicId() == null : this.getTopicId().equals(other.getTopicId()));
+                && (this.getTopicId() == null ? other.getTopicId() == null : this.getTopicId().equals(other.getTopicId()))
+                && (this.getUpdatedtime() == null ? other.getUpdatedtime() == null : this.getUpdatedtime().equals(other.getUpdatedtime()));
     }
 
     @Override
@@ -84,6 +86,7 @@ public class Review implements Serializable, ICommentOriginator{
         result = prime * result + ((getUid() == null) ? 0 : getUid().hashCode());
         result = prime * result + ((getParentRid() == null) ? 0 : getParentRid().hashCode());
         result = prime * result + ((getTopicId() == null) ? 0 : getTopicId().hashCode());
+        result = prime * result + ((getUpdatedtime() == null) ? 0 : getUpdatedtime().hashCode());
         return result;
     }
 
@@ -99,6 +102,7 @@ public class Review implements Serializable, ICommentOriginator{
         sb.append(", uid=").append(uid);
         sb.append(", parentRid=").append(parentRid);
         sb.append(", topicId=").append(topicId);
+        sb.append(", updatedtime=").append(updatedtime);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

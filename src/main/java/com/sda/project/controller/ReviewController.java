@@ -5,10 +5,12 @@ import com.sda.project.common.Result;
 import com.sda.project.domain.CommentMemento;
 import com.sda.project.domain.Review;
 import com.sda.project.request.PostReviewRequest;
+import com.sda.project.request.UndoRequest;
 import com.sda.project.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @RestController
@@ -28,7 +30,6 @@ public class ReviewController {
 
     @PostMapping("/{topicId}")
     Result addReview(@PathVariable String topicId, @RequestBody PostReviewRequest postReviewRequest) {
-
         reviewService.addReview(topicId, postReviewRequest.getUid(), postReviewRequest.getParentId(), postReviewRequest.getContent(), postReviewRequest.getDate());
         return new Result(Code.CREATED, null, "success posting");
     }
@@ -39,7 +40,7 @@ public class ReviewController {
         return new Result(Code.NO_CONTENT, null, "success delete");
     }
 
-    @GetMapping("/{topicId}/{rid}")
+    @GetMapping("/{rid}/replies")
     Result getReplies(@PathVariable String rid) {
         List<Review> replyList = reviewService.getReplies(rid);
         return new Result(Code.SUCCESS, replyList, "success");
@@ -58,8 +59,9 @@ public class ReviewController {
     }
 
     @PutMapping("/{rid}/undo/{historyId}")
-    Result undoEdit(@PathVariable String rid, @PathVariable String historyId) {
-        reviewService.undoEdit(rid, historyId);
+    Result undoEdit(@PathVariable String rid, @PathVariable String historyId, @RequestBody UndoRequest undoRequest) {
+        Timestamp updateTime = undoRequest.getUpdateTime();
+        reviewService.undoEdit(rid, historyId, updateTime);
         return new Result(Code.SUCCESS, null, "success undo");
     }
     
@@ -67,6 +69,21 @@ public class ReviewController {
     Result getReviewsByUid(@PathVariable String uid) {
         List<Review> reviewList = reviewService.getReviewByUid(uid);
         return new Result(Code.SUCCESS, reviewList, "success");
+    }
+
+    @GetMapping("/rids/{rid}")
+    Result getReviewByRid(@PathVariable String rid) {
+        Review review = reviewService.getReviewByRid(rid);
+        if (review != null) {
+            return new Result(Code.SUCCESS, review, "success");
+        }
+        return new Result(Code.NO_CONTENT, null, "not found");
+    }
+
+    @DeleteMapping("/{rid}/history/{historyId}")
+    Result deleteCommentHistory(@PathVariable String historyId) {
+        reviewService.deleteCommentHistoryById(historyId);
+        return new Result(Code.NO_CONTENT, null, "success delete");
     }
 
 }

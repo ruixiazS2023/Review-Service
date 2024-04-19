@@ -11,10 +11,12 @@
             <result property="uid" column="uid" jdbcType="CHAR"/>
             <result property="parentRid" column="parent_rid" jdbcType="CHAR"/>
             <result property="topicId" column="topic_id" jdbcType="CHAR"/>
+            <result property="updatedtime" column="updatedtime" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <sql id="Base_Column_List">
         rid,content,date,
-        uid,parent_rid,topic_id
+        uid,parent_rid,topic_id,
+        updatedtime
     </sql>
 </mapper>

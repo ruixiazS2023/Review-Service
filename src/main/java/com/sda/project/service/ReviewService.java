@@ -15,8 +15,12 @@ public interface ReviewService extends IService<Review> {
     List<Review> getReplies(String rid);
 
     void editReview(String rid, String newCentent,Timestamp date);
-    void undoEdit(String rid, String historyId);
+    void undoEdit(String rid, String historyId,Timestamp updatedTime);
     List<CommentMemento> getCommentHistory(String rid);
+
+    Review getReviewByRid(String rid);
+
+    void deleteCommentHistoryById(String historyId);
 
 
 
