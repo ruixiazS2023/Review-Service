@@ -30,8 +30,8 @@ public class ReviewController {
 
     @PostMapping("/{topicId}")
     Result addReview(@PathVariable String topicId, @RequestBody PostReviewRequest postReviewRequest) {
-        reviewService.addReview(topicId, postReviewRequest.getUid(), postReviewRequest.getParentId(), postReviewRequest.getContent(), postReviewRequest.getDate());
-        return new Result(Code.CREATED, null, "success posting");
+        String rid = reviewService.addReview(topicId, postReviewRequest.getUid(), postReviewRequest.getParentId(), postReviewRequest.getContent(), postReviewRequest.getDate());
+        return new Result(Code.CREATED, rid, "success posting");
     }
 
     @DeleteMapping("/{rid}")

@@ -8,7 +8,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 public interface ReviewService extends IService<Review> {
-    void addReview(String topicId,String uid, String parentId, String content, Timestamp date);
+    String addReview(String topicId,String uid, String parentId, String content, Timestamp date);
     void deleteReview(String rid);
     List<Review> getReviewByTopicId(String topicId);
     List<Review> getReviewByUid(String uid);

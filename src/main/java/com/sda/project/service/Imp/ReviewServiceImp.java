@@ -21,7 +21,7 @@ public class ReviewServiceImp extends ServiceImpl<ReviewMapper, Review>
     private CommentmementoMapper commentMementoMapper;
 
     @Override
-    public void addReview(String topicId,String uid, String parentId, String content, Timestamp date) {
+    public String addReview(String topicId,String uid, String parentId, String content, Timestamp date) {
         String rid = UUID.randomUUID().toString().substring(0,8);
         Review review = new Review();
         review.setRid(rid);
@@ -31,6 +31,7 @@ public class ReviewServiceImp extends ServiceImpl<ReviewMapper, Review>
         review.setContent(content);
         review.setDate(date);
         this.save(review);
+        return rid;
     }
 
     @Override
