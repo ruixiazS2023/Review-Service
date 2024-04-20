@@ -6,10 +6,11 @@
 
     <resultMap id="BaseResultMap" type="com.sda.project.domain.CommentMemento">
             <id property="cmid" column="cmId" jdbcType="CHAR"/>
-            <result property="username" column="uid" jdbcType="VARCHAR"/>
+            <result property="uid" column="uid" jdbcType="VARCHAR"/>
             <result property="date" column="date" jdbcType="TIMESTAMP"/>
             <result property="content" column="content" jdbcType="VARCHAR"/>
             <result property="commentid" column="commentId" jdbcType="CHAR"/>
+            <result property="isdelete" column="isDelete" jdbcType="TINYINT"/>
     </resultMap>
 
     <sql id="Base_Column_List">

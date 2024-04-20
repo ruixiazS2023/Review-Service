@@ -41,53 +41,7 @@ public class ReviewController {
 
     }
 
-    @DeleteMapping("/{rid}")
-    ResponseEntity<?> deleteReview(@PathVariable String rid) {
-        if (rid == null || rid.isEmpty()) {
-            throw new IllegalArgumentException("invalid request");
-        }
-        reviewService.deleteReview(rid);
-        return ResponseUtils.success(null);
-    }
-
-    @GetMapping("/{rid}/replies")
-    ResponseEntity<?> getReplies(@PathVariable String rid, @RequestParam(defaultValue = "0") int page) {
-        if (page < 0 || rid == null || rid.isEmpty()) {
-            throw new IllegalArgumentException("invalid request");
-        }
-        PageResult<?> replyList = reviewService.getRepliesPageByrid(rid, page);
-        return ResponseUtils.success(replyList);
-    }
-
-    @PutMapping("/{topicId}/{rid}")
-    ResponseEntity<?> editReview(@PathVariable String rid, @RequestBody PostReviewRequest postReviewRequest) {
-        if (postReviewRequest == null || postReviewRequest.getContent() == null || postReviewRequest.getContent().isEmpty() || postReviewRequest.getDate() == null) {
-            throw new IllegalArgumentException("invalid request");
-        }
-        reviewService.editReview(rid, postReviewRequest.getContent(), postReviewRequest.getDate());
-        return ResponseUtils.success(null);
-    }
-
-    @GetMapping("/{rid}/history")
-    ResponseEntity<?> getCommentHistory(@PathVariable String rid, @RequestParam(defaultValue = "0") int page) {
-        if (page < 0 || rid == null || rid.isEmpty()) {
-            throw new IllegalArgumentException("invalid request");
-        }
-        PageResult<?> commentMementoList = reviewService.getReviewMementoPageByrId(rid, page);
-        return ResponseUtils.success(commentMementoList);
-    }
-
-    @PutMapping("/{rid}/undo/{historyId}")
-    ResponseEntity<?> undoEdit(@PathVariable String rid, @PathVariable String historyId, @RequestBody UndoRequest undoRequest) {
-        if (undoRequest == null || undoRequest.getUpdateTime() == null || historyId == null || historyId.isEmpty() || rid == null || rid.isEmpty()) {
-            throw new IllegalArgumentException("invalid request");
-        }
-        Timestamp updateTime = undoRequest.getUpdateTime();
-        reviewService.undoEdit(rid, historyId, updateTime);
-        return ResponseUtils.success(null);
-    }
-
-    @GetMapping("/rids/{rid}")
+    @GetMapping("/{topicId}/{rid}")
     ResponseEntity<?> getReviewByRid(@PathVariable String rid) {
         if (rid == null || rid.isEmpty()) {
             throw new IllegalArgumentException("invalid request");
@@ -99,7 +53,63 @@ public class ReviewController {
         return ResponseUtils.error(Code.NOT_FOUND, "review not found");
     }
 
-    @DeleteMapping("/{rid}/history/{historyId}")
+    @DeleteMapping("/{topicId}/{rid}")
+    ResponseEntity<?> deleteReview(@PathVariable String rid) {
+        if (rid == null || rid.isEmpty()) {
+            throw new IllegalArgumentException("invalid request");
+        }
+        reviewService.deleteReview(rid);
+        return ResponseUtils.success(null);
+    }
+
+    @PutMapping("/{topicId}/{rid}")
+    ResponseEntity<?> editReview(@PathVariable String rid, @RequestBody PostReviewRequest postReviewRequest) {
+        if (postReviewRequest == null || postReviewRequest.getContent() == null || postReviewRequest.getContent().isEmpty() || postReviewRequest.getDate() == null) {
+            throw new IllegalArgumentException("invalid request");
+        }
+        reviewService.editReview(rid, postReviewRequest.getContent(), postReviewRequest.getDate());
+        return ResponseUtils.success(null);
+    }
+
+    @GetMapping("replies/{rid}")
+    ResponseEntity<?> getReplies(@PathVariable String rid, @RequestParam(defaultValue = "0") int page) {
+        if (page < 0 || rid == null || rid.isEmpty()) {
+            throw new IllegalArgumentException("invalid request");
+        }
+        PageResult<?> replyList = reviewService.getRepliesPageByrid(rid, page);
+        return ResponseUtils.success(replyList);
+    }
+
+    @GetMapping("/histories/{rid}")
+    ResponseEntity<?> getCommentHistory(@PathVariable String rid, @RequestParam(defaultValue = "0") int page) {
+        if (page < 0 || rid == null || rid.isEmpty()) {
+            throw new IllegalArgumentException("invalid request");
+        }
+        PageResult<?> commentMementoList = reviewService.getReviewMementoPageByrId(rid, page);
+        return ResponseUtils.success(commentMementoList);
+    }
+
+    @PutMapping("/histories/undo")
+    ResponseEntity<?> undoEdit(@RequestBody UndoRequest undoRequest) {
+        if(undoRequest == null) {
+            throw new IllegalArgumentException("invalid request");
+        }
+        String rid = undoRequest.getRid();
+        String historyId = undoRequest.getHistoryId();
+        if (undoRequest.getUpdateTime() == null
+                || historyId == null
+                || historyId.isEmpty()
+                || rid == null
+                || rid.isEmpty()) {
+            throw new IllegalArgumentException("invalid request");
+        }
+        Timestamp updateTime = undoRequest.getUpdateTime();
+        reviewService.undoEdit(rid, historyId, updateTime);
+        return ResponseUtils.success(null);
+    }
+
+
+    @DeleteMapping("/histories/undo/{historyId}")
     ResponseEntity<?> deleteCommentHistory(@PathVariable String historyId) {
         if (historyId == null || historyId.isEmpty()) {
             throw new IllegalArgumentException("invalid request");
@@ -108,7 +118,7 @@ public class ReviewController {
         return ResponseUtils.success(null);
     }
 
-    @GetMapping("/uid/{uid}")
+    @GetMapping("/uids/{uid}")
     ResponseEntity<?> getUserReviewPageByUid(@PathVariable String uid, @RequestParam(defaultValue = "0") int page) {
         if (page < 0 || uid == null || uid.isEmpty()) {
             throw new IllegalArgumentException("invalid request");

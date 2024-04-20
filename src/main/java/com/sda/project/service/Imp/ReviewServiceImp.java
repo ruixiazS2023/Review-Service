@@ -110,8 +110,6 @@ public class ReviewServiceImp extends ServiceImpl<ReviewMapper, Review>
                 .orderByDesc("date");
         Page<Review> reviewPage = this.page(new Page<>(page, PAGESIZE), queryWrapper);
         long total = reviewPage.getTotal();
-        System.out.println("current page:" + reviewPage.getCurrent());
-        System.out.println("The total page:" + reviewPage.getPages());
         boolean hasMore = reviewPage.getCurrent() < reviewPage.getPages();
         return new PageResult<>(reviewPage.getRecords(), hasMore,total);
     }
