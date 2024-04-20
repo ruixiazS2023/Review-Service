@@ -2,6 +2,7 @@ package com.sda.project.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.sda.project.domain.CommentMemento;
+import com.sda.project.domain.PageResult;
 import com.sda.project.domain.Review;
 
 import java.sql.Timestamp;
@@ -21,6 +22,14 @@ public interface ReviewService extends IService<Review> {
     Review getReviewByRid(String rid);
 
     void deleteCommentHistoryById(String historyId);
+
+    PageResult<?> getReviewPageByTopicId(String topicId, int page);
+
+    PageResult<?> getReviewMementoPageByrId(String rid, int page);
+
+    PageResult<?> getRepliesPageByrid(String rid, int page);
+
+    PageResult<?> getUserReviewPageByUid(String uid, int page);
 
 
 

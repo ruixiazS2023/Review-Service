@@ -6,3 +6,10 @@ spring:
         driver-class-name: com.mysql.cj.jdbc.Driver
     application:
       name: review
+
+mybatis-plus:
+    global-config:
+        db-config:
+            logic-delete-field: isDelete
+            logic-delete-value: 1
+            logic-not-delete-value: 0
