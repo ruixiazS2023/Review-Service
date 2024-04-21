@@ -3,7 +3,6 @@ kind: ConfigMap
 metadata:
   name: spring-review-config
 data:
-  MYSQL_DB_HOST: 'mysql-review.default.svc.cluster.local'
-  MYSQL_DB_USER: 'user'
-  MYSQL_DB_PASSWORD: 'aptx4869'
-  MYSQL_DB_PORT: '3306'
+  DATABASE_HOST: 'mysql-review.default.svc.cluster.local'
+  DATABASE_USER: 'user'
+  DATABASE_PASSWORD: 'aptx4869'

@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: review
-          image: us.gcr.io/gcp-docker-kubernetes-413420/review-service:1.0.4
+          image: 767398101426.dkr.ecr.us-west-2.amazonaws.com/review:1.0
           ports:
             - containerPort: 8080
           envFrom:
