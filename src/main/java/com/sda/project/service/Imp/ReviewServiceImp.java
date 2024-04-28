@@ -13,8 +13,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
-import java.util.List;
 
+
+/**
+ *
+ * This class is used to implement the service of review.
+ *
+ */
 @Service
 public class ReviewServiceImp extends ServiceImpl<ReviewMapper, Review>
         implements ReviewService {
@@ -22,6 +27,8 @@ public class ReviewServiceImp extends ServiceImpl<ReviewMapper, Review>
     @Autowired
     private CommentmementoMapper commentMementoMapper;
 
+
+    // The number of reviews per page
     final int PAGESIZE = 10;
 
 
@@ -42,29 +49,6 @@ public class ReviewServiceImp extends ServiceImpl<ReviewMapper, Review>
     @Override
     public void deleteReview(String rid) {
         this.removeById(rid);
-    }
-
-    @Override
-    public List<Review> getReviewByTopicId(String topicId) {
-        QueryWrapper<Review> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("topic_id", topicId)
-                .isNull("parent_rid")
-                .orderByDesc("date");
-        return this.list(queryWrapper);
-    }
-
-    @Override
-    public List<Review> getReviewByUid(String uid) {
-        QueryWrapper<Review> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("uid", uid);
-        return this.list(queryWrapper);
-    }
-
-    @Override
-    public List<Review> getReplies(String rid) {
-        QueryWrapper<Review> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("parent_rid", rid).orderByDesc("date");
-        return this.list(queryWrapper);
     }
 
     @Override
@@ -91,12 +75,6 @@ public class ReviewServiceImp extends ServiceImpl<ReviewMapper, Review>
         commentMementoMapper.deleteById(historyId);
     }
 
-    @Override
-    public List<CommentMemento> getCommentHistory(String rid) {
-        QueryWrapper<CommentMemento> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("commentId", rid).orderByDesc("date");
-        return commentMementoMapper.selectList(queryWrapper);
-    }
     @Override
     public Review getReviewByRid(String rid) {
         return this.getById(rid);
