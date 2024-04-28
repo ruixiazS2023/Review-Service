@@ -7,9 +7,13 @@ import lombok.Data;
  */
 @Data
 public class ResponseEntity<T>{
+    // The code of the response.
     private int code;
+    // The message of the response.
     private String message;
+    // The data of the response.
     private T data;
+    // The description of the response.
     private String description;
 
     public ResponseEntity(Code code, T data, String description) {
