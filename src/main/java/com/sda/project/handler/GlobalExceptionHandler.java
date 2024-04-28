@@ -6,6 +6,12 @@ import com.sda.project.common.ResponseUtils;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+
+/**
+ *
+ * This class is used to handle the global exceptions.
+ *
+ */
 @RestControllerAdvice
 public class GlobalExceptionHandler {
     @ExceptionHandler(IllegalArgumentException.class)

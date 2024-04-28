@@ -1,4 +1,8 @@
 package com.sda.project.common;
+
+/**
+ * This class is used to help generate response.
+ */
 public class ResponseUtils {
     public static <T> ResponseEntity<T> success(T data) {
         return new ResponseEntity<>(Code.SUCCESS, data, null);

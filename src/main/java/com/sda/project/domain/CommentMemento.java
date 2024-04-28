@@ -13,37 +13,41 @@ import lombok.Data;
 
 /**
  * 
- * @TableName CommentMemento
+ * This class is used to store the CommentMemento information.
  */
 @TableName(value ="CommentMemento")
 @Data
 public class CommentMemento implements Serializable {
     /**
-     * 
+     *  the id of the CommentMemento
      */
     @TableId
     private String cmid;
 
     /**
-     * 
+     * the user id of the CommentMemento
      */
     private String uid;
 
     /**
-     * 
+     * the post or last edit date of the Comment
      */
     private Date date;
 
     /**
-     * 
+     * the content of the Comment
      */
     private String content;
 
     /**
-     * 
+     * the Review id of related Review
      */
     private String commentid;
 
+    /**
+     * the isdelete of the CommentMemento for logical delete
+     * 0 is not delete 1 is delete
+     */
     @JsonIgnore
     @TableLogic
     private Integer isdelete;

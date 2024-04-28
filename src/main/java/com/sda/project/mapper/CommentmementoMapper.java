@@ -5,10 +5,9 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
-* @author zhongruixia
-* @description 针对表【CommentMemento】的数据库操作Mapper
-* @createDate 2024-03-30 21:33:05
-* @Entity com.sda.project.domain.Commentmemento
+ *
+ * This class is used to operate the database operations for the table【CommentMemento】.
+ *
 */
 @Mapper
 public interface CommentmementoMapper extends BaseMapper<CommentMemento> {

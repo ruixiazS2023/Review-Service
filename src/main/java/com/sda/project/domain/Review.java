@@ -1,55 +1,61 @@
 package com.sda.project.domain;
-
 import com.baomidou.mybatisplus.annotation.*;
-
 import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 /**
  *
- * @TableName review
+ * This class is used to store the review information
+ * and implements ICommentOriginator.
+ *
  */
 @TableName(value ="review")
 @Data
 public class Review implements Serializable, ICommentOriginator{
     /**
-     *
+     * the id of the review
      */
     @TableId
     private String rid;
 
     /**
-     *
+     * the content of the review
      */
     private String content;
 
     /**
-     *
+     * the post date of the review
      */
     private Date date;
 
     /**
-     *
+     * the user id of the review
      */
     private String uid;
 
     /**
-     *
+     * the parent review id of the review
      */
     @JsonIgnore
     private String parentRid;
 
     /**
-     *
+     * the topic id of the review
      */
     private String topicId;
 
+    /**
+     * the updated time of the review
+     */
     private Date updatedtime;
 
+    /**
+     * the isdelete of the review for logical delete
+     * 0 is not delete 1 is delete
+     */
     @JsonIgnore
     @TableLogic
     private Integer isdelete;

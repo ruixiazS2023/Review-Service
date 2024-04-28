@@ -1,5 +1,8 @@
 package com.sda.project.common;
 
+/**
+ * This class is to define the response code and message.
+ */
 public enum Code {
     SUCCESS(20000, "success"),
     FAIL(50000, "fail"),

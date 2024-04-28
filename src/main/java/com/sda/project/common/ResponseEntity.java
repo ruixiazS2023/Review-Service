@@ -2,6 +2,9 @@ package com.sda.project.common;
 
 import lombok.Data;
 
+/**
+ * This class is used to store the response of the API.
+ */
 @Data
 public class ResponseEntity<T>{
     private int code;

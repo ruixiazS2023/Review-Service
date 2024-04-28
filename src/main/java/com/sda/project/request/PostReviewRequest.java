@@ -4,6 +4,12 @@ import lombok.Data;
 
 import java.sql.Timestamp;
 
+
+/**
+ *
+ * This class is used to store the request of post review.
+ *
+ */
 @Data
 public class PostReviewRequest {
     String uid;
