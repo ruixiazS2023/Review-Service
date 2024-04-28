@@ -1,12 +1,8 @@
 package com.sda.project.service;
-
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.sda.project.domain.CommentMemento;
 import com.sda.project.domain.PageResult;
 import com.sda.project.domain.Review;
-
 import java.sql.Timestamp;
-import java.util.List;
 
 /**
  *
